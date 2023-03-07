@@ -1,0 +1,86 @@
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+} */
+
+
+
+/* .logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #3178c6aa);
+} */
+
+@font-face{
+  font-family: 'Kyiv Sans';
+  src: url('/fonts/KyivTypeSans.woff2') format('woff2-variations');
+  font-weight: 0 1000;
+  font-display: swap;
+}
+
+:root{
+  --color-white: #F7F7F2;
+  --color-dark: #261C15;
+}
+
+
+body, html{
+  background-color: var(--color-dark);
+  height: 100%;
+}
+
+
+#app{
+  font-family: 'Kyiv Sans';
+  font-variation-settings: 'wght' 200, 'CONT' 1, 'MIDL' 1 ;
+  color: var(--color-white);
+  
+  display: flex;
+  gap: 6em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.heading{
+  font-size: 2.5em;
+  line-height: 150%;
+  font-variation-settings: 'wght' 800, 'CONT' 1, 'MIDL' 1 ;
+}
+
+.board{
+  width: 100%;
+  max-width: 35rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.square{
+  cursor: pointer;
+  border: solid 1px var(--color-white);
+  background-color: rgba(#F7F7F2, 0.1);
+  aspect-ratio: 1;
+
+  &--player-one{
+    background-color: rgba(#F05D23, 0.8);
+  }
+
+  &--player-two{
+    background-color: rgba(#C5D86D, 0.8);
+  }
+}
