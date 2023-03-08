@@ -25,3 +25,25 @@ export function renderSelectedSquare(target: HTMLElement,sign: Encode): void{
     target.classList.remove('square--player-one');
   }
 }
+
+export function renderCurrentPlayer(element: HTMLElement): void{
+  const cPlayerSection = document.createElement('div') as HTMLDivElement;
+  const cPlayerValue = document.createElement('span') as HTMLDivElement
+  
+  cPlayerSection.classList.add('turn');
+
+  cPlayerValue.classList.add('turn__value');
+  cPlayerValue.textContent = Encode.One;
+
+
+  cPlayerSection.innerHTML = 'Current Player -> &nbsp';
+
+  cPlayerSection.appendChild(cPlayerValue);
+
+  element.appendChild(cPlayerSection);
+}
+
+export function renderPlayerChange(playerNum: Encode): void{
+  const cPlayerValue = document.querySelector('.turn__value') as HTMLElement;
+  cPlayerValue.textContent = `${playerNum}`;  
+}

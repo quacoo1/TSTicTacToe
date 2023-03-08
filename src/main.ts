@@ -2,7 +2,7 @@ import './reset.scss'
 import './style.scss'
 
 import { Players, Encode, Board, Config } from './types'
-import { renderBoard } from './renders'
+import { renderBoard, renderCurrentPlayer } from './renders'
 import { AI } from './ai'
 import { User } from './user'
 
@@ -25,8 +25,9 @@ const config: Config = {
 
 const app = document.querySelector('#app') as HTMLDivElement;
 
-app.innerHTML = `<h1 class="heading">Typescript TicTacToe</h1> <h3 id="turn">player 1</h3>`
+app.innerHTML = `<h1 class="heading">Typescript TicTacToe</h1>`
 
+renderCurrentPlayer(app);
 renderBoard(app);
 
 

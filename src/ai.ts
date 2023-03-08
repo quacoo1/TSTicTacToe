@@ -1,25 +1,45 @@
 import { Config, Encode } from './types';
-import { renderSelectedSquare } from './renders';
+import { renderSelectedSquare, renderPlayerChange } from './renders';
 
 export class AI {
 
     sign: Encode;
+    emptySquares: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
 
     constructor(sign: Encode){
         this.sign = sign
     }
 
-    calculateMove(move: number): number{
-        return move + Math.floor(Math.random() * (9 - move));       
+    pickRandomIndex(max: number): number{
+        return Math.floor(Math.random() * max);
+    }
+
+    calculateMove(config: Config): number | null{
+        this.emptySquares = this.emptySquares.filter((squareNumber) => {
+            return config.board[squareNumber] === Encode.Empty;
+        });
+        
+        if(this.emptySquares.length !== 0){
+            const index = this.pickRandomIndex(this.emptySquares.length);
+            return this.emptySquares[index];
+        }
+    
+        return null
     }
     
     play(config: Config) :void{
-        const move =  this.calculateMove(config.moveCount);
-        const square = document.querySelector(`[data-position="${move}"]`) as HTMLElement;
         
-        config.board[move] = Encode.Two;
-        config.moveCount += 1;
-        config.currentPlayer =  config.players[config.moveCount % 2];
-        renderSelectedSquare(square, this.sign);
+        const move: number | null =  this.calculateMove(config);
+        
+        if(move !== null){
+            const square = document.querySelector(`[data-position="${move}"]`) as HTMLElement;
+            config.board[move] = Encode.Two;
+            config.moveCount += 1;
+            config.currentPlayer =  config.players[config.moveCount % 2];
+            renderPlayerChange(config.currentPlayer)
+            renderSelectedSquare(square, this.sign);
+        }
+
     }
 }

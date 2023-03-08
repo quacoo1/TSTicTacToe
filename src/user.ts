@@ -1,5 +1,5 @@
 import { Encode, Config } from "./types";
-import { renderSelectedSquare } from "./renders";
+import { renderSelectedSquare, renderPlayerChange } from "./renders";
 
 type Next = ()=> void
 
@@ -15,13 +15,16 @@ export class User{
       
       const position = Number(square.dataset.position);
       
-      config.board[position] = this.sign;
-      config.moveCount += 1;
-      config.currentPlayer =  config.players[config.moveCount % 2];
-      renderSelectedSquare(square, this.sign);
-      console.log(config);
-    
-      if(typeof next !== 'undefined') next()
+      if(config.board[position] ===  Encode.Empty){
+        
+        config.board[position] = this.sign;
+        config.moveCount += 1;
+        config.currentPlayer =  config.players[config.moveCount % 2];
+        renderSelectedSquare(square, this.sign);
+        renderPlayerChange(config.currentPlayer);
+        if(typeof next !== 'undefined') next();
+      
+      }
     }
     
   
@@ -35,6 +38,7 @@ export class User{
             }
         });
       })
+
     }
 
   }
