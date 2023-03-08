@@ -43,17 +43,19 @@ body, html{
 
 
 #app{
+
   font-family: 'Kyiv Sans';
   font-variation-settings: 'wght' 200, 'CONT' 1, 'MIDL' 1 ;
   color: var(--color-white);
   
   display: flex;
-  gap: 6em;
+  gap: 2em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 48rem;
   margin: 0 auto;
+  padding-top: 4em;
 }
 
 .heading{
@@ -64,7 +66,7 @@ body, html{
 
 .board{
   width: 100%;
-  max-width: 35rem;
+  max-width: 24rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1em;
@@ -75,6 +77,7 @@ body, html{
   border: solid 1px var(--color-white);
   background-color: rgba(#F7F7F2, 0.1);
   aspect-ratio: 1;
+  transition: background-color 0.5s;
 
   &--player-one{
     background-color: rgba(#F05D23, 0.8);

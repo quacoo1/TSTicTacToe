@@ -1,6 +1,6 @@
-export function renderBoard(element: HTMLDivElement): void{
+import { Encode } from "./types";
 
-  
+export function renderBoard(element: HTMLDivElement): void{ 
   const board = document.createElement('div') as HTMLDivElement;
   board.classList.add('board');
 
@@ -12,4 +12,16 @@ export function renderBoard(element: HTMLDivElement): void{
   }
 
   element.appendChild(board);
+}
+
+export function renderSelectedSquare(target: HTMLElement,sign: Encode): void{
+  if(sign === Encode.One){
+    target.classList.add('square--player-one');
+    target.classList.remove('square--player-two');
+  }
+
+  if(sign === Encode.Two){
+    target.classList.add('square--player-two');
+    target.classList.remove('square--player-one');
+  }
 }

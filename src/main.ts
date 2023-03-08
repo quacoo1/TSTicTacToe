@@ -1,49 +1,38 @@
 import './reset.scss'
 import './style.scss'
 
+import { Players, Encode, Board, Config } from './types'
 import { renderBoard } from './renders'
-import { squareClickListen } from './events'
+import { AI } from './ai'
+import { User } from './user'
 
 // import typescriptLogo from './typescript.svg'
-
-
-enum Player {
-  one = "ONE",
-  two = "TWO",
-}
-
-enum encode {
-  first = 'X',
-  second = 'O',
-  empty = '-',
-}
-
-type Board = [encode, encode, encode, 
-               encode, encode, encode, 
-               encode, encode, encode ]
-
-type Config = {
-  player: Player;
-  board: Board; 
-}
-
-// refactor type
+  // refactor type
 const boardConfig: Board = [
-  encode.empty, encode.empty, encode.empty,
-  encode.empty, encode.empty, encode.empty,
-  encode.empty, encode.empty, encode.empty,
+  Encode.Empty, Encode.Empty, Encode.Empty,
+  Encode.Empty, Encode.Empty, Encode.Empty,
+  Encode.Empty, Encode.Empty, Encode.Empty,
 ]
 
-const config = {
-  player: Player.one,
+const players: Players = [ Encode.One, Encode.Two ]
+
+const config: Config = {
   board: boardConfig,
+  players: players,
+  currentPlayer: players[0],
+  moveCount: 0,
 }
-
-
 
 const app = document.querySelector('#app') as HTMLDivElement;
 
 app.innerHTML = `<h1 class="heading">Typescript TicTacToe</h1> <h3 id="turn">player 1</h3>`
 
-renderBoard(app)
-squareClickListen(config)
+renderBoard(app);
+
+
+const ai = new AI(players[1]);
+const user = new User(players[0]);
+
+user.play(config, () => ai.play(config));
+
+
