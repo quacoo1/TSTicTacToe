@@ -1,7 +1,7 @@
-import { Config, Encode } from './types';
-import { renderSelectedSquare, renderPlayerChange } from './renders';
+import { Config, Encode, Next, Player, GameState  } from './types';
+import { renderSelectedSquare, renderPlayerChange} from './renders';
 
-export class AI {
+export class AI implements Player{
 
     sign: Encode;
     emptySquares: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -28,17 +28,21 @@ export class AI {
         return null
     }
     
-    play(config: Config) :void{
+    play(config: Config, next?: Next) :void{
         
-        const move: number | null =  this.calculateMove(config);
+        if(config.gameState === GameState.playing)
+        {
+            const move: number | null =  this.calculateMove(config);
         
-        if(move !== null){
-            const square = document.querySelector(`[data-position="${move}"]`) as HTMLElement;
-            config.board[move] = Encode.Two;
-            config.moveCount += 1;
-            config.currentPlayer =  config.players[config.moveCount % 2];
-            renderPlayerChange(config.currentPlayer)
-            renderSelectedSquare(square, this.sign);
+            if(move !== null){
+                const square = document.querySelector(`[data-position="${move}"]`) as HTMLElement;
+                config.board[move] = Encode.Two;
+                config.moveCount += 1;
+                config.currentPlayer =  config.players[config.moveCount % 2];
+                renderPlayerChange(config.currentPlayer)
+                renderSelectedSquare(square, this.sign);
+                if(typeof next !== 'undefined') next();
+            }
         }
 
     }

@@ -1,11 +1,9 @@
 import './reset.scss'
 import './style.scss'
 
-import { Players, Encode, Board, Config } from './types'
+import { Players, Encode, Board, Config, GameState } from './types'
 import { renderBoard, renderCurrentPlayer } from './renders'
-import { AI } from './ai'
-import { User } from './user'
-
+import { gameLoop } from './events'
 // import typescriptLogo from './typescript.svg'
   // refactor type
 const boardConfig: Board = [
@@ -21,6 +19,7 @@ const config: Config = {
   players: players,
   currentPlayer: players[0],
   moveCount: 0,
+  gameState: GameState.playing,
 }
 
 const app = document.querySelector('#app') as HTMLDivElement;
@@ -29,11 +28,10 @@ app.innerHTML = `<h1 class="heading">Typescript TicTacToe</h1>`
 
 renderCurrentPlayer(app);
 renderBoard(app);
+gameLoop(config)
 
 
-const ai = new AI(players[1]);
-const user = new User(players[0]);
 
-user.play(config, () => ai.play(config));
+
 
 

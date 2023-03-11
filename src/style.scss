@@ -66,10 +66,33 @@ body, html{
 
 .board{
   width: 100%;
-  max-width: 24rem;
+  position: relative;
+  max-width: 26rem;
+  padding: 1em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1em;
+
+  &__overlay{
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: absolute;
+    inset: 0;
+    
+    color: #F7F7F2;
+    font-size: 2em;
+    font-variation-settings: 'wght' 1000, 'CONT' 1, 'MIDL' -500 ;
+    background-color: rgba(#261C15, 0);
+    transition: background-color 0.5s;
+    
+    &--show{
+      visibility: visible;
+      background-color: rgba(#261C15, 0.9);
+    }
+  }
 }
 
 .square{

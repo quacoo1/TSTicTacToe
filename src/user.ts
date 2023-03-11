@@ -1,9 +1,9 @@
-import { Encode, Config } from "./types";
+import { Encode, Config, Next, Player, GameState } from "./types";
 import { renderSelectedSquare, renderPlayerChange } from "./renders";
 
-type Next = ()=> void
 
-export class User{
+
+export class User implements Player{
     sign: Encode;
   
     constructor(sign: Encode){
@@ -33,7 +33,7 @@ export class User{
     
       squares.forEach(element => {
         element.addEventListener('click', (event) => { 
-            if(config.currentPlayer ===  this.sign){
+            if(config.currentPlayer ===  this.sign && config.gameState === GameState.playing){
                 this.#squareClickHandler(event, config, next);
             }
         });

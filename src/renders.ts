@@ -1,9 +1,14 @@
 import { Encode } from "./types";
 
+function addOverlay(parent: HTMLElement){
+  parent.innerHTML = `<div class="board__overlay"><button> Reset </button><div>`
+}
+
 export function renderBoard(element: HTMLDivElement): void{ 
   const board = document.createElement('div') as HTMLDivElement;
   board.classList.add('board');
-
+  addOverlay(board);
+  
   for(let position = 0; position < 9; position++){
     const square = document.createElement('div') as HTMLDivElement; 
     square.classList.add('square');
